@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { Toaster } from '@/components/ui/toaster';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import HomePage from '@/pages/HomePage';
-import AboutPage from '@/pages/AboutPage';
-import ServicesPage from '@/pages/ServicesPage';
-import ProjectsPage from '@/pages/ProjectsPage';
-import ContactPage from '@/pages/ContactPage';
+import { Toaster } from './components/ui/toaster';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import HomePage from './components/pages/HomePage'
+import AboutPage from './components/pages/AboutPage';
+import ServicesPage from './components/pages/ServicesPage';
+import ProjectsPage from './components/pages/ProjectsPage';
+import ContactPage from './components/pages/ContactPage';
 
 function App() {
   return (
