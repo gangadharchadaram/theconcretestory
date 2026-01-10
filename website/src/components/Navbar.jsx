@@ -40,9 +40,9 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-20">
           <Link to="/" className="flex items-center space-x-3">
             <img 
-              src="https://horizons-cdn.hostinger.com/f9451076-3468-4f3c-ae77-24ba226f0898/0a6c11835c2a4a5eb3353b1a12c3ccc2.png" 
+              src="/logo_tcs.png" 
               alt="The Concrete Story Logo" 
-              className="h-12 w-auto"
+              className="h-20 w-auto"
             />
           </Link>
 
