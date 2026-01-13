@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { AnimatePresence } from "framer-motion";
+import ChatBot from "./components/ChatBot";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -57,6 +58,8 @@ function App() {
         <Navbar />
         <AnimatedRoutes />
         <Footer />
+        <ChatBot />
+
         <Toaster />
       </div>
     </Router>

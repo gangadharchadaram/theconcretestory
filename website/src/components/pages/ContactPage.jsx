@@ -179,20 +179,26 @@ const ContactPage = () => {
           </motion.div>
 
           {/* Map / Image */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5"
-              alt="Office"
-              className="w-full h-full object-cover shadow-lg"
-            />
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-amber-100/50 rounded-full blur-2xl"></div>
-          </motion.div>
+          {/* Map Section */}
+<motion.div
+  initial={{ opacity: 0, x: 30 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6 }}
+  className="relative h-[500px] w-full shadow-lg overflow-hidden"
+>
+  <iframe
+    title="Office Location"
+    src="https://www.google.com/maps?q=123%20Construction%20Ave&output=embed"
+    className="w-full h-full border-0"
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+  ></iframe>
+
+  {/* Decorative Glow */}
+  <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-amber-100/50 rounded-full blur-2xl pointer-events-none"></div>
+</motion.div>
+
         </div>
       </section>
 
