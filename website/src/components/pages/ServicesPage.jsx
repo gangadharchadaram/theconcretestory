@@ -221,7 +221,7 @@ const ServicesPage = () => {
            </div>
            <div className="flex flex-col sm:flex-row gap-4">
               <Link to="/contact">
-                <Button className="bg-white text-gray-900 hover:bg-gray-100 hover:text-amber-600 font-bold uppercase tracking-wider px-8 py-6 rounded-none transition-colors border-2 border-transparent">
+                <Button className="bg-violet text-gray-900 hover:bg-gray-100 hover:text-amber-600 font-bold uppercase tracking-wider px-8 py-6 rounded-none transition-colors border-2 border-transparent">
                    Get a Quote
                 </Button>
               </Link>

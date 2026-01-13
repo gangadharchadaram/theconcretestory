@@ -214,7 +214,7 @@ const ContactPage = () => {
             </p>
           </div>
           <Link to="/projects">
-            <Button className="bg-white text-gray-900 hover:text-amber-600 font-bold uppercase tracking-wider px-8 py-6 rounded-none">
+            <Button className="bg-violet text-gray-900 hover:text-amber-600 font-bold uppercase tracking-wider px-8 py-6 rounded-none">
               View Our Work
             </Button>
           </Link>

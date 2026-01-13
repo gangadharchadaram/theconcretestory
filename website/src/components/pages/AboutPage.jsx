@@ -202,9 +202,9 @@ const AboutPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {[
-              { step: '2008', text: 'Company Founded' },
-              { step: '2012', text: 'Expanded Services' },
-              { step: '2018', text: '500+ Projects Delivered' },
+              { step: '2020', text: 'Company Founded' },
+              { step: '2022', text: 'Expanded Services' },
+              { step: '2025', text: '100+ Projects Delivered' },
               { step: 'Today', text: 'Trusted Construction Partner' }
             ].map((item, index) => (
               <div key={index} className="text-center">
@@ -231,7 +231,7 @@ const AboutPage = () => {
             </p>
           </div>
           <Link to="/contact">
-            <Button className="bg-white text-gray-900 hover:text-amber-600 font-bold uppercase tracking-wider px-8 py-6 rounded-none">
+            <Button className="bg-violet text-gray-900 hover:text-amber-600 font-bold uppercase tracking-wider px-8 py-6 rounded-none">
               Contact Us
             </Button>
           </Link>
