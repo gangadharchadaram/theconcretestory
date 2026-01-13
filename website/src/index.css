@@ -65,61 +65,62 @@ html {
   align-items: center;
   justify-content: center;
   z-index: 99999;
+  overflow: hidden; /* 🔥 prevents overflow */
 }
 
 .swing-word {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;        /* 🔥 allow wrapping if needed */
+  justify-content: center;
+  max-width: 90vw;        /* 🔥 mobile safe width */
+  text-align: center;
 }
 
 .swing-letter {
-  font-size: clamp(24px, 4vw, 48px);
-  letter-spacing: 0.35em;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.75);
   display: inline-block;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
   animation-duration: 1.6s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
+
+  /* 🔥 RESPONSIVE SIZE */
+  font-size: clamp(18px, 4.5vw, 46px);
+  letter-spacing: 0.25em;
 }
 
-/* Letter moving UP first */
+/* Desktop enhancement */
+@media (min-width: 768px) {
+  .swing-letter {
+    letter-spacing: 0.35em;
+  }
+}
+
+/* Extra small mobile fix */
+@media (max-width: 360px) {
+  .swing-letter {
+    font-size: 16px;
+    letter-spacing: 0.18em;
+  }
+}
+
+/* Animation directions */
 .swing-up {
   animation-name: swingUp;
 }
 
-/* Letter moving DOWN first */
 .swing-down {
   animation-name: swingDown;
 }
 
 @keyframes swingUp {
-  0% {
-    transform: translateY(0);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translateY(-14px);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 0.6;
-  }
+  0% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(-12px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0.6; }
 }
 
 @keyframes swingDown {
-  0% {
-    transform: translateY(0);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translateY(14px);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 0.6;
-  }
+  0% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(12px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0.6; }
 }
-
