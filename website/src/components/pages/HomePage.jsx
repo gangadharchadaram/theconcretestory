@@ -631,7 +631,7 @@ const HomePage = () => {
                 className="relative"
               >
                 <div className="relative z-10">
-                  <img className="w-full h-[500px] object-cover shadow-xl" alt="Construction team reviewing blueprints" src="/images/banner3.jpg" />
+                  <img className="w-full h-[500px] object-cover shadow-xl" alt="Construction team reviewing blueprints" src="/images/banner4.webp" />
                 </div>
                 <div className="absolute -bottom-6 -right-6 w-2/3 h-2/3 border-[10px] border-amber-600 z-0 hidden md:block"></div>
               </motion.div>
