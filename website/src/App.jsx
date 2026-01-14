@@ -17,6 +17,7 @@ import ContactPage from "./components/pages/ContactPage";
 
 import PageTransition from "./components/PageTransition";
 import TopLoader from "./components/TopLoader";
+import WhatsAppChatButton from "@/components/WhatsAppChatButton";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -60,8 +61,9 @@ function App() {
 
         <Navbar />
         <AnimatedRoutes />
+              <WhatsAppChatButton />
+
         <Footer />
-        <ChatBot />
 
         <Toaster />
       </div>
