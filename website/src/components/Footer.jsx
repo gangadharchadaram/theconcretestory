@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Brand Column */}
           <div>
             <img 
-              src="/images/logotcs-1.PNG" 
+              src="/images/finallogotcs.png" 
               alt="The Concrete Story" 
               className="h-32 w-auto mb-2"
             />

@@ -255,20 +255,19 @@ const slides = [
       {/* Parallax Container */}
       <motion.div style={{ y: yParallax }} className="absolute inset-0 w-full h-[120%] -top-[10%]">
         {/* 🎥 VIDEO LAYER — stays mounted, never restarts */}
-<motion.div
-  style={{ y: yParallax }}
-  className="absolute inset-0 w-full h-[120%] -top-[10%]"
->
+<div className="absolute inset-0 z-0 overflow-hidden">
   <video
     ref={videoRef}
-    className="absolute inset-0 w-full h-full object-cover"
-    src="/videos/villa1.mov"
+    className="w-full h-full object-cover"
+    src="/videos/villa1.mp4"   // ⚠️ Convert to mp4 for mobile
     autoPlay
     muted
     loop
     playsInline
+    preload="auto"
+    poster="/images/video-poster.jpg"   // optional fallback image
   />
-</motion.div>
+</div>
 
 {/* 🎭 OVERLAYS (static) */}
 <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent z-10" />

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const PHONE_NUMBER = "+919876543210"; // 👉 Change this to your real number
+const PHONE_NUMBER = "+917720011155"; 
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -44,7 +44,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <img 
-              src="/images/logotcs-1.PNG" 
+              src="/images/finallogotcs.png" 
               alt="The Concrete Story Logo" 
               className="h-20 w-auto"
             />
