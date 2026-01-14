@@ -149,7 +149,7 @@ const ServicesPage = () => {
               >
                  <div className="relative z-10 grid grid-cols-2 gap-4">
                     <img className="w-full h-64 object-cover rounded-sm shadow-lg transform translate-y-8" src="images/banner4.webp" alt="Construction site worker" />
-                    <img className="w-full h-64 object-cover rounded-sm shadow-lg" src="/images/banner5.jpg" alt="Architect planning" />
+                    <img className="w-full h-64 object-cover rounded-sm shadow-lg" src="/images/banner4.jpeg" alt="Architect planning" />
                  </div>
                  <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-amber-100/50 rounded-full blur-2xl -z-0"></div>
                  <div className="absolute top-0 right-0 w-32 h-32 border-4 border-amber-600/20 -z-0 transform translate-x-4 -translate-y-4"></div>

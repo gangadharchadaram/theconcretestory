@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import { Helmet } from "react-helmet";
 import { AnimatePresence } from "framer-motion";
 import ChatBot from "./components/ChatBot";
+import ScrollToTop from "./components/ScrollToTop";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -55,6 +56,8 @@ function App() {
       </Helmet>
 
       <div className="min-h-screen bg-gray-50">
+              <ScrollToTop />   
+
         <Navbar />
         <AnimatedRoutes />
         <Footer />

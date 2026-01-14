@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
+const PHONE_NUMBER = "+919876543210"; // 👉 Change this to your real number
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -38,6 +40,8 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
+
+          {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <img 
               src="/images/logotcs-1.PNG" 
@@ -46,6 +50,7 @@ const Navbar = () => {
             />
           </Link>
 
+          {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
               <Link
@@ -68,8 +73,20 @@ const Navbar = () => {
                 )}
               </Link>
             ))}
+
+            {/* 📞 Call Button */}
+            <a
+              href={`tel:${PHONE_NUMBER}`}
+              className="flex items-center gap-2 bg-blue-800 text-white px-4 py-2 rounded-full hover:bg-blue-900 transition"
+            >
+              <Phone size={18} />
+              <span className="text-sm font-semibold">
+                {PHONE_NUMBER}
+              </span>
+            </a>
           </div>
 
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
@@ -83,6 +100,7 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -108,6 +126,15 @@ const Navbar = () => {
                   {link.label}
                 </Link>
               ))}
+
+              {/* 📞 Mobile Call Button */}
+              <a
+                href={`tel:${PHONE_NUMBER}`}
+                className="flex items-center justify-center gap-2 bg-blue-800 text-white py-3 rounded-lg font-semibold hover:bg-blue-900 transition"
+              >
+                <Phone size={20} />
+                Call Now
+              </a>
             </div>
           </motion.div>
         )}

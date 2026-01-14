@@ -108,7 +108,7 @@ const AboutPage = () => {
           >
             <img
               className="w-full h-[400px] object-cover rounded-sm shadow-lg"
-              src="images/banner5.jpg"
+              src="images/banner5.webp"
               alt="Construction team"
             />
             <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-amber-100/50 rounded-full blur-2xl"></div>
