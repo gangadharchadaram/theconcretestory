@@ -40,7 +40,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-20">
           <Link to="/" className="flex items-center space-x-3">
             <img 
-              src="/logo_tcs.png" 
+              src="/images/logotcs-1.PNG" 
               alt="The Concrete Story Logo" 
               className="h-20 w-auto"
             />

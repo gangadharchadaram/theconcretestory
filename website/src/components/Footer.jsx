@@ -10,9 +10,9 @@ const Footer = () => {
           {/* Brand Column */}
           <div>
             <img 
-              src="https://horizons-cdn.hostinger.com/f9451076-3468-4f3c-ae77-24ba226f0898/0a6c11835c2a4a5eb3353b1a12c3ccc2.png" 
+              src="/images/logotcs-1.PNG" 
               alt="The Concrete Story" 
-              className="h-16 w-auto mb-6"
+              className="h-32 w-auto mb-2"
             />
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
               Building your dreams with quality and precision. From initial structure to stunning finishing touches, we are your trusted partner in construction excellence.
