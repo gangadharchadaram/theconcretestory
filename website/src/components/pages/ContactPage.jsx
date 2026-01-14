@@ -10,7 +10,7 @@ const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
+    phone: '+917720011155',
     subject: '',
     message: ''
   });
@@ -33,22 +33,23 @@ const ContactPage = () => {
     {
       icon: Phone,
       title: 'Call Us',
-      value: '+1 (555) 123-4567'
+      value: '+917720011155'
     },
     {
       icon: Mail,
       title: 'Email',
-      value: 'info@concretestory.com'
+      value: 'info@theconcretestory.com'
     },
     {
       icon: MapPin,
       title: 'Office Address',
-      value: '123 Construction Ave, Building City'
+      value: 'HN-1, opposite to Goa luxury rental, Guirim, Bardez-Goa'
     },
     {
       icon: Clock,
       title: 'Working Hours',
-      value: 'Mon – Sat | 9:00 AM – 6:00 PM'
+      value: 'Mon – Sat | 9:00 AM – 7:00 PM',
+      value1: 'Sunday | 10:00 AM – 2:00 PM'
     }
   ];
 
@@ -122,6 +123,9 @@ const ContactPage = () => {
                 <p className="text-gray-500 group-hover:text-white/90">
                   {item.value}
                 </p>
+                 <p className="text-gray-500 group-hover:text-white/90">
+                  {item.value1}
+                </p>
               </div>
             </motion.div>
           ))}
@@ -189,7 +193,7 @@ const ContactPage = () => {
 >
   <iframe
     title="Office Location"
-    src="https://www.google.com/maps?q=123%20Construction%20Ave&output=embed"
+    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d283.2677349514503!2d73.80603931683464!3d15.580588349432665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1768378000333!5m2!1sen!2sin" 
     className="w-full h-full border-0"
     loading="lazy"
     referrerPolicy="no-referrer-when-downgrade"

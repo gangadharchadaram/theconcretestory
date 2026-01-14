@@ -6,8 +6,33 @@ import { ArrowRight, Building2, Hammer, Sparkles, CheckCircle2, ChevronLeft, Che
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
+
+const projects = [
+  {
+    title: "renovation of resort at Agonda, South-Goa",
+    images: [
+      "/images/villa1:1.jpeg",
+      "/images/villa1:2.jpeg",
+      "/images/villa1:3.jpeg",
+      "/images/villa1:5.jpeg",
+      "/images/villa1:6.jpeg",
+      "/images/villa1:7.jpeg",
+    ],
+  },
+  {
+    title: "Resort Construction – South-Goa",
+    images: [
+      "/images/villa2:1.jpeg",
+      "/images/villa2:2.jpeg",
+      "/images/villa2:3.jpeg",
+    ],
+  },
+];
+
+
 const Counter = ({ from = 0, to, duration = 2, label, suffix = '' }) => {
   const ref = useRef(null);
+  
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   
   useEffect(() => {
@@ -137,38 +162,39 @@ const AnimatedBackground = ({ image, index }) => {
 };
 
 const HeroSlider = () => {
+  const videoRef = useRef(null);
+
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
   const { scrollY } = useScroll();
   const yParallax = useTransform(scrollY, [0, 500], [0, 200]);
   const opacityParallax = useTransform(scrollY, [0, 300], [1, 0]);
 
-  const slides = [
-    {
-      id: 1,
-      image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop",
-      title: "Building The Future With Precision",
-      subtitle: "From Structure to Stunning Finish",
-      cta: "Our Projects",
-      link: "/projects"
-    },
-    {
-      id: 2,
-      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop",
-      title: "Excellence in Construction",
-      subtitle: "Quality You Can Trust, Service You Deserve",
-      cta: "Our Services",
-      link: "/services"
-    },
-    {
-      id: 3,
-      image: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop",
-      title: "Renovating Dreams Into Reality",
-      subtitle: "Transforming Spaces with Expert Craftsmanship",
-      cta: "Contact Us",
-      link: "/contact"
-    }
-  ];
+const slides = [
+  {
+    id: 1,
+    title: "Luxury Villas Crafted to Perfection",
+    subtitle: "From Structure to Stunning Finish",
+    cta: "Our Projects",
+    link: "/projects"
+  },
+  {
+    id: 2,
+    title: "Premium Construction Excellence",
+    subtitle: "Building Homes That Inspire Lifestyle",
+    cta: "Our Services",
+    link: "/services"
+  },
+  {
+    id: 3,
+    title: "Where Design Meets Durability",
+    subtitle: "Transforming Visions Into Reality",
+    cta: "Contact Us",
+    link: "/contact"
+  }
+];
+
+
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -228,23 +254,46 @@ const HeroSlider = () => {
     <div className="relative h-screen min-h-[700px] bg-gray-900 overflow-hidden">
       {/* Parallax Container */}
       <motion.div style={{ y: yParallax }} className="absolute inset-0 w-full h-[120%] -top-[10%]">
+        {/* 🎥 VIDEO LAYER — stays mounted, never restarts */}
+<motion.div
+  style={{ y: yParallax }}
+  className="absolute inset-0 w-full h-[120%] -top-[10%]"
+>
+  <video
+    ref={videoRef}
+    className="absolute inset-0 w-full h-full object-cover"
+    src="/videos/villa1.mov"
+    autoPlay
+    muted
+    loop
+    playsInline
+  />
+</motion.div>
+
+{/* 🎭 OVERLAYS (static) */}
+<div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent z-10" />
+<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/20 z-10" />
+<div className="absolute inset-0 opacity-[0.15] z-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]" />
+<Particles />
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={current}
-            custom={direction}
-            variants={slideContainerVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: "spring", stiffness: 200, damping: 25 },
-              opacity: { duration: 0.8 },
-              scale: { duration: 0.8 }
-            }}
-            className="absolute inset-0 overflow-hidden"
+    custom={direction}
+    variants={slideContainerVariants}
+    initial="enter"
+    animate="center"
+    exit="exit"
+    transition={{
+      x: { type: "spring", stiffness: 200, damping: 25 },
+      opacity: { duration: 0.8 },
+      scale: { duration: 0.8 }
+    }}
+    className="absolute inset-0 overflow-hidden"
           >
             {/* Advanced Background Animation Component */}
-            <AnimatedBackground image={slides[current].image} index={current} />
+            {/* Media Layer */}
+
+
             
             {/* Dynamic Color Shift Overlay */}
             <motion.div 
@@ -403,6 +452,65 @@ const HeroSlider = () => {
   );
 };
 
+const ProjectGallery = ({ project }) => {
+  const [index, setIndex] = useState(0);
+
+  const prevImage = () => {
+    setIndex((prev) =>
+      prev === 0 ? project.images.length - 1 : prev - 1
+    );
+  };
+
+  const nextImage = () => {
+    setIndex((prev) => (prev + 1) % project.images.length);
+  };
+
+  return (
+    <div className="group relative overflow-hidden rounded-xl shadow-lg">
+
+      {/* ✅ Image with smooth transition */}
+      <AnimatePresence mode="wait">
+        <motion.img
+          key={index}
+          src={project.images[index]}
+          alt={project.title}
+          className="w-full h-80 object-cover"
+          initial={{ opacity: 0, scale: 1.04 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4 }}
+        />
+      </AnimatePresence>
+
+      {/* ⬅️ Previous */}
+      <button
+        onClick={prevImage}
+        className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-amber-600 text-white p-2 rounded-full z-10 transition"
+      >
+        ‹
+      </button>
+
+      {/* ➡️ Next */}
+      <button
+        onClick={nextImage}
+        className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-amber-600 text-white p-2 rounded-full z-10 transition"
+      >
+        ›
+      </button>
+
+      {/* 🏷️ Title Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-5 pointer-events-none">
+        <h3 className="text-white font-bold text-lg">
+          {project.title}
+        </h3>
+      </div>
+    </div>
+  );
+};
+
+
+
+
 const HomePage = () => {
   const services = [
     {
@@ -440,19 +548,19 @@ const HomePage = () => {
   const testimonials = [
     {
       id: 1,
-      name: "James Wilson",
+      name: "John",
       role: "Property Developer",
       text: "The Concrete Story delivered our office complex ahead of schedule. Their attention to detail and professional management made the entire process seamless."
     },
     {
       id: 2,
-      name: "Sarah Jenkins",
+      name: "Sarah",
       role: "Homeowner",
       text: "We couldn't be happier with our home renovation. They transformed our outdated space into a modern masterpiece. Highly recommended!"
     },
     {
       id: 3,
-      name: "Michael Chen",
+      name: "Michael",
       role: "Business Owner",
       text: "Exceptional quality and service. The team was transparent about costs and timelines throughout the entire retail expansion project."
     }
@@ -467,7 +575,8 @@ const HomePage = () => {
       </Helmet>
 
       {/* Hero Slider */}
-      <HeroSlider />
+      <HeroSlider>const videoRef = useRef(null);
+</HeroSlider>
 
       <div className="relative bg-white z-10">
         {/* Intro Section */}
@@ -488,7 +597,7 @@ const HomePage = () => {
                   We Construct Your Dreams With <span className="text-amber-600">Passion</span>
                 </h2>
                 <p className="text-gray-600 mb-6 leading-relaxed">
-                  The Concrete Story is a premier construction firm dedicated to delivering excellence in every project. With over 15 years of experience, we combine traditional craftsmanship with modern innovation to build structures that stand the test of time.
+                  The Concrete Story is a premier construction firm dedicated to delivering excellence in every project. With over 5 years of experience, we combine traditional craftsmanship with modern innovation to build structures that stand the test of time.
                 </p>
                 <div className="grid grid-cols-2 gap-6 mb-8">
                   <div className="flex items-center space-x-3">
@@ -522,7 +631,7 @@ const HomePage = () => {
                 className="relative"
               >
                 <div className="relative z-10">
-                  <img className="w-full h-[500px] object-cover shadow-xl" alt="Construction team reviewing blueprints" src="https://images.unsplash.com/photo-1621754304063-c3c74f8390db" />
+                  <img className="w-full h-[500px] object-cover shadow-xl" alt="Construction team reviewing blueprints" src="/images/banner3.jpg" />
                 </div>
                 <div className="absolute -bottom-6 -right-6 w-2/3 h-2/3 border-[10px] border-amber-600 z-0 hidden md:block"></div>
               </motion.div>
@@ -573,60 +682,32 @@ const HomePage = () => {
           <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <Counter from={0} to={520} label="Projects Completed" suffix="+" />
-              <Counter from={0} to={15} label="Years Experience" suffix="+" />
+              <Counter from={0} to={100} label="Projects Completed" suffix="+" />
+              <Counter from={0} to={5} label="Years Experience" suffix="+" />
               <Counter from={0} to={100} label="Client Satisfaction" suffix="%" />
-              <Counter from={0} to={45} label="Awards Won" />
+              <Counter from={0} to={10} label="Awards Won" />
             </div>
           </div>
         </section>
 
         {/* Portfolio Preview */}
-        <section className="py-20 bg-white">
+       <section className="py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-12">
-              <div className="mb-6 md:mb-0">
+              <div className="text-center mb-16">
                 <span className="text-amber-600 font-bold uppercase tracking-widest text-sm mb-2 block">Our Portfolio</span>
                 <h2 className="text-4xl font-bold text-gray-800">Recent Projects</h2>
               </div>
-              <Link to="/projects">
-                <Button className="bg-amber-600 hover:bg-amber-700 text-white rounded-none px-6">View All Projects</Button>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+  {projects.map((project, index) => (
+    <ProjectGallery key={index} project={project} />
+  ))}
+</div>
+        <div className="mt-12 text-center">
+              <Link to="/services">
+                <Button variant="outline" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-6 text-lg font-semibold rounded-none transition-all">
+                  View All Services
+                </Button>
               </Link>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                {
-                  title: "Modern Commercial Center",
-                  category: "Commercial",
-                  img: <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Modern glass commercial building" src="https://images.unsplash.com/photo-1517643842637-c0759298604b" />
-                },
-                {
-                  title: "Luxury Villa",
-                  category: "Residential",
-                  img: <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Luxury modern villa" src="https://images.unsplash.com/photo-1565995274853-2345d4d29177" />
-                },
-                {
-                  title: "Industrial Complex",
-                  category: "Industrial",
-                  img: <img className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Large industrial warehouse complex" src="https://images.unsplash.com/photo-1533192878908-2dc48b1218bf" />
-                }
-              ].map((project, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="group relative h-80 overflow-hidden cursor-pointer"
-                >
-                  {project.img}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                    <span className="text-amber-500 font-bold text-sm uppercase tracking-wider mb-2">{project.category}</span>
-                    <h3 className="text-white text-xl font-bold">{project.title}</h3>
-                  </div>
-                </motion.div>
-              ))}
             </div>
           </div>
         </section>

@@ -2,69 +2,106 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { MapPin, Calendar, ArrowRight } from 'lucide-react';
+import { MapPin, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const ProjectsPage = () => {
   const [filter, setFilter] = useState('all');
+  const [activeSlide, setActiveSlide] = useState({});
 
   const categories = ['all', 'commercial', 'residential', 'renovation'];
 
   const projects = [
     {
       id: 1,
-      title: 'Modern Office Complex',
-      category: 'commercial',
-      description: 'A premium multi-story office complex built with sustainable materials and modern architecture.',
-      location: 'Downtown District',
-      year: '2023'
+      title: 'renovation of resort at Agonda, South-Goa',
+      category: 'renovation',
+      description: 'Resort renovation in Agonda, South Goa, upgrading rooms, common areas, and exterior finishes to deliver a fresh, modern coastal aesthetic—using weather-friendly materials, improved lighting, and clean premium detailing.',
+      location: 'South Goa',
+      year: '2023',
+      media: [
+        { type: 'image', src: '/images/villa1:1.jpeg' },
+        { type: 'image', src: '/images/villa1:2.jpeg' },
+        { type: 'image', src: '/images/villa1:3.jpeg' },
+        { type: 'image', src: '/images/villa1:4.jpeg' },
+        { type: 'image', src: '/images/villa1:6.jpeg' },
+        { type: 'image', src: '/images/villa1:7.jpeg' },
+      ]
     },
     {
       id: 2,
-      title: 'Luxury Residential Tower',
-      category: 'residential',
-      description: 'High-rise luxury living with panoramic views and world-class amenities.',
-      location: 'Waterfront',
-      year: '2023'
+      title: 'Resort Construction – South-Goa',
+      category: 'commercial',
+      description: 'Complete resort construction in South Goa, delivering a modern hospitality space with durable coastal-grade materials, optimized layouts, premium finishes, and seamless functionality.',
+      location: 'Goa',
+      year: '2024',
+      media: [
+{ type: 'image', src: '/images/villa2:1.jpeg' },
+{ type: 'image', src: '/images/villa2:2.jpeg' },
+{ type: 'image', src: '/images/villa2:3.jpeg' },
+      ]
     },
     {
       id: 3,
-      title: 'Shopping Center Renovation',
-      category: 'renovation',
-      description: 'Complete structural and aesthetic transformation of a retail space.',
-      location: 'Suburban Mall',
-      year: '2022'
+      title: 'Rio De Grande',
+      category: 'commercial',
+      description: 'A premium luxury resort hotel project delivering elegant architecture, superior finishes, optimized layouts, and world-class hospitality standards.',
+      location: 'Goa',
+      year: '2022',
+      media: [
+        { type: 'video', src: '/videos/villa2.mp4' },
+      ]
     },
     {
       id: 4,
-      title: 'Custom Family Villa',
+      title: 'Interior designing of a bungalow',
       category: 'residential',
-      description: 'Bespoke villa designed for comfort, elegance, and durability.',
-      location: 'Green Valley',
-      year: '2023'
+      description: 'Interior design of a private bungalow delivering elegant layouts, premium finishes, customized furniture solutions, and warm, functional living spaces.',
+      location: 'Goa',
+      year: '2023',
+      media: [
+        { type: 'video', src: '/videos/villa1.mov' },
+      ]
     },
     {
       id: 5,
-      title: 'Industrial Warehouse',
+      title: 'GG Garden Resort',
       category: 'commercial',
-      description: 'Large-scale warehouse engineered for logistics efficiency.',
-      location: 'Industrial Park',
-      year: '2022'
+      description: 'End-to-end resort construction and interior execution delivering elegant spaces, durable materials, and a harmonious blend of nature and luxury',
+      location: 'Goa',
+      year: '2022',
+      media: [
+        { type: 'image', src: '/images/villa3:1.jpeg' },
+        { type: 'image', src: '/images/villa3:2.jpeg' },
+        { type: 'image', src: '/images/villa3:3.jpeg' },
+        { type: 'image', src: '/images/villa3:4.jpeg' },
+        { type: 'image', src: '/images/villa3:5.jpeg' },
+        { type: 'image', src: '/images/villa3:6.jpeg' },
+      ]
     },
-    {
-      id: 6,
-      title: 'Heritage Building Restoration',
-      category: 'renovation',
-      description: 'Careful restoration preserving architectural heritage.',
-      location: 'Old Town',
-      year: '2023'
-    }
+   
   ];
 
   const filteredProjects =
     filter === 'all'
       ? projects
       : projects.filter(p => p.category === filter);
+
+  /** Arrow controls */
+  const nextSlide = (projectId, total) => {
+    setActiveSlide(prev => ({
+      ...prev,
+      [projectId]: ((prev[projectId] || 0) + 1) % total
+    }));
+  };
+
+  const prevSlide = (projectId, total) => {
+    setActiveSlide(prev => ({
+      ...prev,
+      [projectId]:
+        ((prev[projectId] || 0) - 1 + total) % total
+    }));
+  };
 
   return (
     <>
@@ -132,50 +169,84 @@ const ProjectsPage = () => {
           {/* Projects Grid */}
           <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <AnimatePresence mode="popLayout">
-              {filteredProjects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  layout
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  whileHover={{ y: -10 }}
-                  className="bg-white p-6 shadow-sm hover:shadow-xl transition-all duration-300 group border border-gray-100 relative overflow-hidden"
-                >
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-amber-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 z-0"></div>
+              {filteredProjects.map((project, index) => {
+                const currentIndex = activeSlide[project.id] || 0;
+                const currentMedia = project.media[currentIndex];
 
-                  <div className="relative z-10">
-                    <div className="mb-4 overflow-hidden">
-                      <img
-                        src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5"
-                        alt={project.title}
-                        className="w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-500"
-                      />
+                return (
+                  <motion.div
+                    key={project.id}
+                    layout
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                    whileHover={{ y: -10 }}
+                    className="bg-white p-6 shadow-sm hover:shadow-xl transition-all duration-300 group border border-gray-100 relative overflow-hidden"
+                  >
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-amber-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 z-0"></div>
+
+                    <div className="relative z-10">
+                      {/* Media Slider */}
+                      <div className="mb-4 overflow-hidden h-56 relative">
+                        {currentMedia.type === 'image' ? (
+                          <img
+                            src={currentMedia.src}
+                            alt={project.title}
+                            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                          />
+                        ) : (
+                          <video
+                            src={currentMedia.src}
+                            controls
+                            className="w-full h-full object-cover"
+                          />
+                        )}
+
+                        {/* Left Arrow */}
+                        {project.media.length > 1 && (
+                          <button
+                            onClick={() => prevSlide(project.id, project.media.length)}
+                            className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-1 rounded-full hover:bg-black/70"
+                          >
+                            <ChevronLeft size={20} />
+                          </button>
+                        )}
+
+                        {/* Right Arrow */}
+                        {project.media.length > 1 && (
+                          <button
+                            onClick={() => nextSlide(project.id, project.media.length)}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-1 rounded-full hover:bg-black/70"
+                          >
+                            <ChevronRight size={20} />
+                          </button>
+                        )}
+                      </div>
+
+                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-white">
+                        {project.title}
+                      </h3>
+
+                      <p className="text-gray-500 mb-4 group-hover:text-white/90">
+                        {project.description}
+                      </p>
+
+                      <div className="flex justify-between text-sm text-gray-500 group-hover:text-white/90">
+                        <span className="flex items-center gap-1">
+                          <MapPin className="w-4 h-4" />
+                          {project.location}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          {project.year}
+                        </span>
+                      </div>
                     </div>
-
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-white">
-                      {project.title}
-                    </h3>
-
-                    <p className="text-gray-500 mb-4 group-hover:text-white/90">
-                      {project.description}
-                    </p>
-
-                    <div className="flex justify-between text-sm text-gray-500 group-hover:text-white/90">
-                      <span className="flex items-center gap-1">
-                        <MapPin className="w-4 h-4" />
-                        {project.location}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
-                        {project.year}
-                      </span>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </AnimatePresence>
           </motion.div>
         </div>

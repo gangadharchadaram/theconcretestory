@@ -85,7 +85,7 @@ const Footer = () => {
                 <div>
                   <span className="block text-white text-sm font-semibold">Address:</span>
                   <p className="text-gray-400 text-sm">
-                    123 Construction Ave, Building City, BC 12345
+                    HN-1, opposite to Goa luxury rental, Guirim, Bardez-Goa
                   </p>
                 </div>
               </div>
@@ -95,7 +95,7 @@ const Footer = () => {
                 </div>
                 <div>
                   <span className="block text-white text-sm font-semibold">Phone:</span>
-                  <p className="text-gray-400 text-sm">+1 (555) 123-4567</p>
+                  <p className="text-gray-400 text-sm">+917720011155</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
@@ -104,7 +104,7 @@ const Footer = () => {
                 </div>
                 <div>
                   <span className="block text-white text-sm font-semibold">Email:</span>
-                  <p className="text-gray-400 text-sm">info@concretestory.com</p>
+                  <p className="text-gray-400 text-sm">info@theconcretestory.com</p>
                 </div>
               </div>
             </div>

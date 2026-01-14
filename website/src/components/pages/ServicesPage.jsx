@@ -25,12 +25,7 @@ const ServicesPage = () => {
       description: 'Detailed planning, estimation, and scheduling services to set your project up for success before construction begins.',
       features: ['Budgeting', 'Scheduling', 'Permit Acquisition']
     },
-    {
-      icon: Paintbrush,
-      title: 'Virtual Design & Build',
-      description: 'Advanced 3D modeling and visualization to help you see the final result before we even start building.',
-      features: ['3D Modeling', 'BIM Services', 'Virtual Walkthroughs']
-    },
+   
     {
       icon: HardHat,
       title: 'Project Management',
@@ -43,6 +38,38 @@ const ServicesPage = () => {
       description: 'A unified workflow where we handle both design and construction, streamlining communication and efficiency.',
       features: ['Unified Team', 'Faster Delivery', 'Cost Efficiency']
     }
+  ];
+
+   const mission = [
+    {
+      title: 'Mission 1',
+      description: 'Our mission is to consistently deliver high-quality construction solutions through meticulous planning, efficient execution and a strong commitment to engineering excellence.',
+    },
+    {
+       title: 'Mission 2',
+      description: 'We aim to create long-lasting spaces that combine functionality, durability and aesthetic value. We ensure every client experiences a smooth and reliable construction journey.',
+    },
+    {
+       title: 'Mission 3',
+      description: 'Our mission is to continuously innovate, embrace better technologies and uphold the highest standards of safety and workmanship in everything we build.',
+    },
+  ];
+
+   const service = [
+    {
+      title: 'Residential and Commercial Construction and Interior Designing :',
+      description: 'Comprehensive services for building high end quality residential Villa’s, Apartments and commercial buildings tailored to Client Specifications.',
+    },
+    {
+       title: 'Project Management Services :',
+      description: 'End to end project management including Legal works, Planning, Execution and oversight to ensure timely and cost-effective delivery.',
+    },
+    {
+       title: 'Annual Maintenance Contract (AMC) :',
+      description: 'AMF for:',
+            features: ['Villa’s', 'Hotels', 'Banks', 'Corporate Offices']
+
+    },
   ];
 
   return (
@@ -121,8 +148,8 @@ const ServicesPage = () => {
                 className="relative"
               >
                  <div className="relative z-10 grid grid-cols-2 gap-4">
-                    <img className="w-full h-64 object-cover rounded-sm shadow-lg transform translate-y-8" src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" alt="Construction site worker" />
-                    <img className="w-full h-64 object-cover rounded-sm shadow-lg" src="https://images.unsplash.com/photo-1581094794329-cd119653243f?q=80&w=1000&auto=format&fit=crop" alt="Architect planning" />
+                    <img className="w-full h-64 object-cover rounded-sm shadow-lg transform translate-y-8" src="images/banner3.jpg" alt="Construction site worker" />
+                    <img className="w-full h-64 object-cover rounded-sm shadow-lg" src="/images/banner2.jpg" alt="Architect planning" />
                  </div>
                  <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-amber-100/50 rounded-full blur-2xl -z-0"></div>
                  <div className="absolute top-0 right-0 w-32 h-32 border-4 border-amber-600/20 -z-0 transform translate-x-4 -translate-y-4"></div>
@@ -181,35 +208,231 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      {/* Process/Steps Section */}
-      <section className="py-20 bg-gray-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-           <div className="text-center mb-16">
-            <span className="text-amber-500 font-bold uppercase tracking-widest text-sm mb-2 block">How We Work</span>
-            <h2 className="text-4xl font-bold text-white">Our Construction Process</h2>
+      {/* Mission Section */}
+{/* Mission Section */}
+<section className="py-32 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+
+  {/* Soft animated background glow */}
+  <motion.div
+    className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(245,158,11,0.08),transparent_65%)]"
+    animate={{ opacity: [0.4, 0.7, 0.4] }}
+    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+  />
+
+  <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    {/* Heading */}
+    <div className="text-center mb-24">
+      <span className="text-amber-600 font-bold uppercase tracking-widest text-sm block mb-3">
+        Our Mission
+      </span>
+      <h2 className="text-4xl md:text-5xl font-bold text-gray-900 max-w-3xl mx-auto leading-tight">
+        Building Trust. Creating Value. Shaping the Future.
+      </h2>
+      <p className="mt-5 text-gray-600 max-w-2xl mx-auto">
+        Our mission guides every decision we make — from planning to execution and beyond.
+      </p>
+    </div>
+
+    {/* Mission Cards */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+
+      {mission.map((item, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: index * 0.15 }}
+          whileHover={{ y: -6 }}
+          className="relative bg-white rounded-2xl p-10 shadow-lg hover:shadow-xl border border-gray-100 transition-all group"
+        >
+
+          {/* Soft Top Accent */}
+          <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-amber-400 via-amber-500 to-orange-400"></div>
+
+          {/* Icon Badge */}
+          <div className="w-14 h-14 rounded-xl bg-amber-100 flex items-center justify-center text-amber-700 mb-6 shadow-sm">
+            <CheckCircle2 className="w-7 h-7" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-             {[
-               { step: '01', title: 'Consultation', desc: 'Initial meeting to discuss vision & requirements.' },
-               { step: '02', title: 'Planning', desc: 'Detailed blueprints, timeline & cost estimation.' },
-               { step: '03', title: 'Construction', desc: 'Professional execution with regular updates.' },
-               { step: '04', title: 'Handover', desc: 'Final inspection and project delivery.' }
-             ].map((item, idx) => (
-                <div key={idx} className="relative group text-center md:text-left">
-                   <div className="text-6xl font-bold text-gray-800 mb-4 group-hover:text-amber-600/20 transition-colors duration-300">{item.step}</div>
-                   <div className="absolute top-8 left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 w-12 h-1 bg-amber-600 mb-4"></div>
-                   <h3 className="text-xl font-bold text-white mb-2 mt-8">{item.title}</h3>
-                   <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
-                   {idx !== 3 && (
-                      <div className="hidden md:block absolute top-12 right-0 w-full h-[1px] bg-gray-800 -z-10 translate-x-1/2"></div>
-                   )}
-                </div>
-             ))}
+          {/* Title */}
+          <h3 className="text-xl font-bold text-gray-900 mb-4">
+            {item.title}
+          </h3>
+
+          {/* Description */}
+          <p className="text-gray-600 leading-relaxed text-sm">
+            {item.description}
+          </p>
+          
+
+        </motion.div>
+      ))}
+
+    </div>
+  </div>
+</section>
+
+
+
+     {/*services section*/}
+<section className="py-24 bg-gradient-to-b from-gray-50 to-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    {/* Heading */}
+    <div className="text-center mb-20">
+      <span className="text-amber-600 font-bold uppercase tracking-widest text-sm block mb-3">
+        Our Services
+      </span>
+      <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight max-w-4xl mx-auto">
+        Delivering services with <span className="text-amber-600">precision</span>, integrity &
+        excellence — crafted with care.
+      </h2>
+    </div>
+
+    {/* Cards */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+
+      {service.map((item, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: index * 0.1 }}
+          whileHover={{ y: -10 }}
+          className="relative group"
+        >
+
+          {/* Glow Border */}
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 opacity-0 group-hover:opacity-100 blur-lg transition duration-500"></div>
+
+          {/* Card */}
+          <div className="relative bg-white/90 backdrop-blur-xl rounded-2xl p-10 shadow-xl border border-gray-100 overflow-hidden">
+
+            {/* Decorative corner */}
+            <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/10 rounded-bl-full"></div>
+
+            {/* Icon Badge */}
+            <div className="w-16 h-16 flex items-center justify-center rounded-xl bg-amber-600 text-white shadow-lg mb-6 text-xl font-bold">
+              {index + 1}
+            </div>
+
+            {/* Title */}
+            <h3 className="text-2xl font-bold text-gray-900 mb-4 leading-snug">
+              {item.title}
+            </h3>
+
+            {/* Description */}
+            <p className="text-gray-600 leading-relaxed mb-6">
+              {item.description}
+            </p>
+
+              {item.features && (
+  <ul className="space-y-2 border-t border-gray-100 pt-4 mt-4">
+    {item.features.map((feature, i) => (
+      <li
+        key={i}
+        className="flex items-center text-sm text-gray-600"
+      >
+        <ArrowRight className="w-3 h-3 text-amber-600 mr-2" />
+        {feature}
+      </li>
+    ))}
+  </ul>
+)}
+
+
           </div>
-        </div>
-      </section>
+        </motion.div>
+      ))}
+
+    </div>
+  </div>
+</section>
+
+
+      {/* Process/Steps Section */}
+      {/* Process Section */}
+<section className="py-32 bg-gray-950 relative overflow-hidden text-white">
+
+  {/* Ambient gradient */}
+  <div className="absolute inset-0 bg-gradient-to-br from-amber-900/10 via-transparent to-black"></div>
+
+  <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    {/* Heading */}
+    <div className="text-center mb-24">
+      <span className="text-amber-500 font-bold uppercase tracking-widest text-sm block mb-3">
+        How We Work
+      </span>
+      <h2 className="text-4xl md:text-5xl font-bold">
+        Our Construction Process
+      </h2>
+      <p className="mt-5 text-gray-400 max-w-2xl mx-auto">
+        A streamlined process ensuring transparency, quality and timely delivery.
+      </p>
+    </div>
+
+    {/* Timeline */}
+    <div className="relative">
+
+      {/* Horizontal Line */}
+      <motion.div
+        className="hidden md:block absolute top-24 left-0 right-0 h-[3px] bg-gradient-to-r from-amber-400 via-amber-600 to-amber-400 rounded-full"
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.3, ease: "easeOut" }}
+        style={{ transformOrigin: "left" }}
+      />
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-14">
+
+        {[
+          { step: "01", title: "Consultation", desc: "Understanding your vision, scope, and expectations." },
+          { step: "02", title: "Planning", desc: "Blueprints, cost estimation, scheduling and approvals." },
+          { step: "03", title: "Construction", desc: "Execution with continuous quality monitoring." },
+          { step: "04", title: "Handover", desc: "Final inspection and seamless project delivery." },
+        ].map((item, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
+            whileHover={{ y: -8 }}
+            className="relative group"
+          >
+
+            {/* Dot */}
+            <div className="hidden md:flex absolute -top-4 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-amber-500 shadow-lg ring-4 ring-gray-950"></div>
+
+            {/* Card */}
+            <div className="bg-gray-900 rounded-2xl p-8 border border-white/10 shadow-xl hover:shadow-amber-600/20 transition-all">
+
+              <div className="text-amber-500 text-5xl font-extrabold mb-4">
+                {item.step}
+              </div>
+
+              <h3 className="text-xl font-bold mb-3">
+                {item.title}
+              </h3>
+
+              <p className="text-gray-400 text-sm leading-relaxed">
+                {item.desc}
+              </p>
+
+            </div>
+
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* CTA Section */}
       <section className="py-20 bg-amber-600 relative">
