@@ -19,7 +19,7 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a
-                href="#"
+                href="https://www.linkedin.com/company/111486433/admin/dashboard/"
                 className="w-10 h-10 bg-gray-700 rounded-lg flex items-center justify-center hover:bg-amber-600 transition-colors duration-300"
               >
                 <Facebook className="w-5 h-5" />
@@ -31,7 +31,7 @@ const Footer = () => {
                 <Instagram className="w-5 h-5" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/company/111486433/admin/dashboard/"
                 className="w-10 h-10 bg-gray-700 rounded-lg flex items-center justify-center hover:bg-amber-600 transition-colors duration-300"
               >
                 <Linkedin className="w-5 h-5" />
