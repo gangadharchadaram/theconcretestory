@@ -5,8 +5,35 @@ import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
+import { Download } from "lucide-react";
+
 
 const ContactPage = () => {
+
+  const VCARD = `BEGIN:VCARD
+VERSION:3.0
+FN:The Concrete Story
+ORG:The Concrete Story
+TEL;TYPE=WORK:+91XXXXXXXXXX
+EMAIL:info@theconcretestory.in
+URL:https://theconcretestory.in
+ADR:;;Goa, India;;;;
+END:VCARD`;
+
+const downloadVCard = () => {
+  const blob = new Blob([VCARD], { type: "text/vcard" });
+
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "The_Concrete_Story.vcf";
+  a.click();
+
+  URL.revokeObjectURL(url);
+};
+
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -172,13 +199,33 @@ const ContactPage = () => {
                 className="w-full px-4 py-4 border border-gray-200 focus:border-amber-600 outline-none resize-none"
               />
 
-              <Button
-                type="submit"
-                className="bg-gray-900 hover:bg-amber-600 text-white w-full py-6 uppercase tracking-wider font-bold group"
-              >
-                Send Message
-                <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4">
+
+  <Button
+    type="submit"
+    className="flex-1 bg-gray-900 hover:bg-amber-600 text-white py-6 uppercase tracking-wider font-bold group"
+  >
+    Send Message
+    <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+  </Button>
+
+  <motion.div
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="flex-1"
+  >
+    <Button
+      type="button"
+      variant="outline"
+      onClick={downloadVCard}
+      className="w-full py-6 border-2 border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white uppercase tracking-wider font-bold"
+    >
+      <Download className="mr-2 w-5 h-5" />
+      Download vCard
+    </Button>
+  </motion.div>
+
+</div>
             </form>
           </motion.div>
 

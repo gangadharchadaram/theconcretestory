@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence, useInView, animate, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Building2, Hammer, Sparkles, CheckCircle2, ChevronLeft, ChevronRight, Star, Quote, HardHat, Ruler, MousePointer2, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { useState } from "react";
 
 
 const projects = [
@@ -107,6 +108,7 @@ const galleryImages = [
     image: "/images/Resort.png",
   },
 ];
+
 
 
 const Counter = ({ from = 0, to, duration = 2, label, suffix = '' }) => {
@@ -589,6 +591,27 @@ const ProjectGallery = ({ project }) => {
 
 
 const HomePage = () => {
+  const IMAGES_PER_LOAD = 6;
+
+const [visibleImages, setVisibleImages] = useState(IMAGES_PER_LOAD);
+
+const displayedImages = galleryImages.slice(0, visibleImages);
+
+const handleLoadMore = () => {
+  setVisibleImages((prev) =>
+    Math.min(prev + 3, galleryImages.length)
+  );
+};
+
+const handleShowLess = () => {
+  setVisibleImages(IMAGES_PER_LOAD);
+
+  window.scrollTo({
+    top: document.getElementById("portfolio")?.offsetTop - 80,
+    behavior: "smooth",
+  });
+};
+
   const services = [
     {
       icon: Building2,
@@ -717,39 +740,40 @@ const HomePage = () => {
         </section>
 
 
-{/*gallery section*/}
-<section className="py-24 bg-gray-50">
-  <div className="max-w-7xl mx-auto px-4">
-
-    {/* Heading */}
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className="text-center mb-16"
-    >
-      <div className="flex justify-center items-center gap-3 mb-4">
-        <div className="h-[2px] w-12 bg-amber-600"></div>
-        <span className="uppercase text-sm tracking-[4px] font-semibold text-amber-600">
-          Our Portfolio
-        </span>
-        <div className="h-[2px] w-12 bg-amber-600"></div>
-      </div>
-
-      <h2 className="text-4xl font-bold text-gray-800">
-        Completed Projects
-      </h2>
-
-      <p className="text-gray-500 mt-5 max-w-2xl mx-auto">
-        Every project reflects our commitment to quality, innovation and
-        customer satisfaction.
-      </p>
-    </motion.div>
-
-    {/* Gallery */}
-   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-  {galleryImages.map((project, index) => (
+     {/*gallery section*/}
+      <section id="portfolio" className="py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+      
+          {/* Heading */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <div className="flex justify-center items-center gap-3 mb-4">
+              <div className="h-[2px] w-12 bg-amber-600"></div>
+              <span className="uppercase text-sm tracking-[4px] font-semibold text-amber-600">
+                Our Portfolio
+              </span>
+              <div className="h-[2px] w-12 bg-amber-600"></div>
+            </div>
+      
+            <h2 className="text-4xl font-bold text-gray-800">
+              Completed Projects
+            </h2>
+      
+            <p className="text-gray-500 mt-5 max-w-2xl mx-auto">
+              Every project reflects our commitment to quality, innovation and
+              customer satisfaction.
+            </p>
+          </motion.div>
+      
+          {/* Gallery */}
+     {/* Gallery */}
+<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+  {displayedImages.map((project, index) => (
     <motion.div
       key={index}
       initial={{ opacity: 0, y: 30 }}
@@ -759,16 +783,13 @@ const HomePage = () => {
       className="group overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all duration-500"
     >
       <div className="relative overflow-hidden">
-
         <img
           src={project.image}
           alt={project.title}
           className="w-full h-[300px] object-cover transition-transform duration-700 group-hover:scale-110"
         />
 
-        {/* Overlay */}
         <div className="absolute inset-0 bg-black/55 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
-
           <div className="text-center px-4">
             <p className="text-amber-400 uppercase tracking-[3px] text-xs mb-2">
               {project.category}
@@ -778,16 +799,34 @@ const HomePage = () => {
               {project.title}
             </h3>
           </div>
-
         </div>
-
       </div>
     </motion.div>
   ))}
 </div>
 
-  </div>
-</section>
+{/* Button - OUTSIDE GRID */}
+<div className="mt-12 flex justify-center">
+  {visibleImages < galleryImages.length ? (
+    <Button
+      onClick={handleLoadMore}
+      className="bg-amber-600 hover:bg-amber-700 text-white rounded-none px-10 py-6"
+    >
+      Load More Projects
+    </Button>
+  ) : (
+    <Button
+      onClick={handleShowLess}
+      variant="outline"
+      className="border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white rounded-none px-10 py-6"
+    >
+      Show Less
+    </Button>
+  )}
+</div>
+      
+        </div>
+      </section>
 
         {/* Services Section */}
         <section className="py-20 bg-gray-50">

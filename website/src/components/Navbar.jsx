@@ -3,10 +3,33 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Download } from "lucide-react";
 
 const PHONE_NUMBER = "+917720011155"; 
 
 const Navbar = () => {
+
+  const VCARD = `BEGIN:VCARD
+VERSION:3.0
+FN:The Concrete Story
+ORG:The Concrete Story
+TEL;TYPE=WORK:+917720011155
+EMAIL:info@theconcretestory.in
+URL:https://theconcretestory.in
+ADR:;;Goa, India;;;;
+END:VCARD`;
+
+const downloadVCard = () => {
+  const blob = new Blob([VCARD], { type: "text/vcard" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "The_Concrete_Story.vcf";
+  a.click();
+
+  URL.revokeObjectURL(url);
+};
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -51,40 +74,52 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={cn(
-                  'text-sm font-semibold transition-colors relative group',
-                  location.pathname === link.path
-                    ? 'text-blue-800'
-                    : 'text-gray-700 hover:text-blue-800'
-                )}
-              >
-                {link.label}
-                {location.pathname === link.path && (
-                  <motion.div
-                    layoutId="navbar-indicator"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-amber-600"
-                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </Link>
-            ))}
+<div className="hidden md:flex items-center space-x-5">
+  {navLinks.map((link) => (
+    <Link
+      key={link.path}
+      to={link.path}
+      className={cn(
+        "text-sm font-semibold transition-colors relative group",
+        location.pathname === link.path
+          ? "text-blue-800"
+          : "text-gray-700 hover:text-blue-800"
+      )}
+    >
+      {link.label}
 
-            {/* 📞 Call Button */}
-            <a
-              href={`tel:${PHONE_NUMBER}`}
-              className="flex items-center gap-2 bg-blue-800 text-white px-4 py-2 rounded-full hover:bg-blue-900 transition"
-            >
-              <Phone size={18} />
-              <span className="text-sm font-semibold">
-                {PHONE_NUMBER}
-              </span>
-            </a>
-          </div>
+      {location.pathname === link.path && (
+        <motion.div
+          layoutId="navbar-indicator"
+          className="absolute -bottom-1 left-0 right-0 h-0.5 bg-amber-600"
+          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+        />
+      )}
+    </Link>
+  ))}
+
+  {/* Download vCard */}
+  <button
+    onClick={downloadVCard}
+    className="flex items-center gap-2 border border-amber-600 text-amber-600 px-4 py-2 rounded-full hover:bg-amber-600 hover:text-white transition"
+  >
+    <Download size={18} />
+    <span className="text-sm font-semibold">
+      Save VCard
+    </span>
+  </button>
+
+  {/* Call Button */}
+  <a
+    href={`tel:${PHONE_NUMBER}`}
+    className="flex items-center gap-2 bg-blue-800 text-white px-4 py-2 rounded-full hover:bg-blue-900 transition"
+  >
+    <Phone size={18} />
+    <span className="text-sm font-semibold">
+      {PHONE_NUMBER}
+    </span>
+  </a>
+</div>
 
           {/* Mobile Menu Button */}
           <button
@@ -128,13 +163,33 @@ const Navbar = () => {
               ))}
 
               {/* 📞 Mobile Call Button */}
-              <a
-                href={`tel:${PHONE_NUMBER}`}
-                className="flex items-center justify-center gap-2 bg-blue-800 text-white py-3 rounded-lg font-semibold hover:bg-blue-900 transition"
-              >
-                <Phone size={20} />
-                Call Now
-              </a>
+              <div className="flex items-center gap-3">
+
+  {/* Download vCard */}
+  <button
+    onClick={downloadVCard}
+    className="flex items-center gap-2 border border-amber-600 text-amber-600 px-4 py-2 rounded-full hover:bg-amber-600 hover:text-white transition"
+  >
+    <Download size={18} />
+    <span className="text-sm font-semibold">
+      Save VCard
+    </span>
+  </button>
+
+  
+
+  {/* Call Button */}
+  <a
+    href={`tel:${PHONE_NUMBER}`}
+    className="flex items-center gap-2 bg-blue-800 text-white px-4 py-2 rounded-full hover:bg-blue-900 transition"
+  >
+    <Phone size={18} />
+    <span className="text-sm font-semibold">
+      {PHONE_NUMBER}
+    </span>
+  </a>
+
+</div>
             </div>
           </motion.div>
         )}
