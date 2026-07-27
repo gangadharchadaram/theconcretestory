@@ -16,7 +16,7 @@ FN:The Concrete Story
 ORG:The Concrete Story
 TEL;TYPE=WORK:+91XXXXXXXXXX
 EMAIL:info@theconcretestory.in
-URL:https://theconcretestory.in
+URL:https://theconcretestory.com
 ADR:;;Goa, India;;;;
 END:VCARD`;
 
